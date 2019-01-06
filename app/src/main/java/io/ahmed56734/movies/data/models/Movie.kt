@@ -1,6 +1,7 @@
 package io.ahmed56734.movies.data.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -28,14 +29,12 @@ data class Movie(
     @SerializedName("poster_path")
     val posterPath: String, // /i2dF9UxOeb77CAJrOflj0RpqJRF.jpg
 
+
     @SerializedName("original_language")
     val originalLanguage: String, // en
 
     @SerializedName("original_title")
     val originalTitle: String, // Aquaman
-
-    @SerializedName("genre_ids")
-    val genreIds: List<Int>,
 
     @SerializedName("backdrop_path")
     val backdropPath: String, // /5A2bMlLfJrAfX9bqAibOL2gCruF.jpg
@@ -47,8 +46,22 @@ data class Movie(
     val overview: String, // Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world.
 
     @SerializedName("release_date")
-    val releaseDate: String // 2018-12-07
-)
+    val releaseDate: String, // 2018-12-07
+
+    var isFavorite: Boolean = false
+) {
+
+    @Ignore
+    @SerializedName("genre_ids")
+    var genreIds: List<Int>? = null
+
+
+    val fullPosterPath
+        get() = "https://image.tmdb.org/t/p/w200$posterPath"
+
+    val fullbackDropPathBuilder
+        get() = "https://image.tmdb.org/t/p/w300$backdropPath"
+}
 
 class MoviesResponse(
     @SerializedName("page")

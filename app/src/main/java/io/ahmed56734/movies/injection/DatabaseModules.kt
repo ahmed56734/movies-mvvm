@@ -19,6 +19,6 @@ val databaseModule = module {
     }
 
     single {
-        LocalDataSource(get())
+        LocalDataSource(movieDao = get())
     }
 }

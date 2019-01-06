@@ -7,4 +7,10 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
+    <fragment
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="io.ahmed56734.movies.ui.popular.PopularMoviesFragment"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

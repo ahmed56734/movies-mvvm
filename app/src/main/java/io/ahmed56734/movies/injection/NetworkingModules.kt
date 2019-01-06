@@ -2,8 +2,10 @@ package io.ahmed56734.movies.injection
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import io.ahmed56734.movies.BuildConfig
 import io.ahmed56734.movies.data.remote.MoviesApi
+import io.ahmed56734.movies.data.remote.RemoteDataSource
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -59,7 +61,8 @@ val networkingModule = module {
     single<Retrofit.Builder> {
         Retrofit.Builder()
             .addConverterFactory(get<GsonConverterFactory>())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
             .client(get())
     }
 
@@ -70,6 +73,10 @@ val networkingModule = module {
             .build()
             .create(MoviesApi::class.java)
 
+    }
+
+    single {
+        RemoteDataSource(moviesApi = get())
     }
 
 
