@@ -8,7 +8,7 @@
 
         <variable
             name="networkState"
-            type="io.ahmed56734.movies.repository.NetworkState" />
+            type="io.ahmed56734.movies.util.NetworkState" />
     </data>
 
     <FrameLayout

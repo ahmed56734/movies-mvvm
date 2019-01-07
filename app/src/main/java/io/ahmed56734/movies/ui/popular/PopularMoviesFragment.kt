@@ -6,18 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.ahmed56734.movies.MoviesAdapter
 import io.ahmed56734.movies.databinding.FragmentPopularMoviesBinding
+import io.ahmed56734.movies.ui.MoviesAdapter
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PopularMoviesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PopularMoviesFragment()
-    }
 
     private val viewModel: PopularMoviesViewModel by viewModel()
     private val moviesAdapter: MoviesAdapter by lazy { MoviesAdapter() }
@@ -45,6 +43,18 @@ class PopularMoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        moviesAdapter.apply {
+            onMovieClicked = {
+                findNavController().navigate(
+                    PopularMoviesFragmentDirections
+                    .actionPopularMoviesFragmentToMovieDetailsFragment(it.id)
+                )
+            }
+            onBookmarkClicked = {
+                viewModel.toggleFavorites(it)
+            }
+        }
 
         moviesRecyclerView.apply {
             adapter = moviesAdapter

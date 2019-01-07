@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|start"
                 android:background="#00000000"
-                app:srcCompat="@{movie.isFavorite ? @drawable/ic_bookmark_plus : @drawable/ic_bookmark_minus}"
+                app:srcCompat="@{movie.isFavorite ? @drawable/ic_bookmark_minus : @drawable/ic_bookmark_plus}"
                 tools:src="@drawable/ic_bookmark_plus" />
 
         </FrameLayout>

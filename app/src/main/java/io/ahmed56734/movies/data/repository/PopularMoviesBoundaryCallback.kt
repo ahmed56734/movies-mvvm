@@ -1,24 +1,24 @@
-package io.ahmed56734.movies.repository.popular
+package io.ahmed56734.movies.data.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import io.ahmed56734.movies.data.local.LocalDataSource
 import io.ahmed56734.movies.data.models.Movie
+import io.ahmed56734.movies.util.NetworkState
 import io.ahmed56734.movies.data.remote.RemoteDataSource
-import io.ahmed56734.movies.repository.NetworkState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MoviesBoundaryCallback(
+class PopularMoviesBoundaryCallback(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val networkPageSize: Int
 ) : PagedList.BoundaryCallback<Movie>() {
 
-    private val TAG = MoviesBoundaryCallback::class.java.simpleName
+    private val TAG = PopularMoviesBoundaryCallback::class.java.simpleName
 
     private var page = 1
 

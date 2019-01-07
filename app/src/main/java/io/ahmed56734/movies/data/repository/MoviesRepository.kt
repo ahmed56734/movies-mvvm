@@ -1,15 +1,16 @@
-package io.ahmed56734.movies.repository.popular
+package io.ahmed56734.movies.data.repository
 
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import io.ahmed56734.movies.data.local.LocalDataSource
+import io.ahmed56734.movies.util.Listing
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.data.remote.RemoteDataSource
-import io.ahmed56734.movies.repository.Listing
 
-class PopularMoviesRepository(
+class MoviesRepository(
     private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource) {
+    private val localDataSource: LocalDataSource
+) {
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 20
@@ -18,10 +19,11 @@ class PopularMoviesRepository(
 
     fun popularMovies(): Listing<Movie> {
 
-        val boundaryCallback = MoviesBoundaryCallback(
+        val boundaryCallback = PopularMoviesBoundaryCallback(
             remoteDataSource = remoteDataSource,
             localDataSource = localDataSource,
-            networkPageSize = NETWORK_PAGE_SIZE)
+            networkPageSize = NETWORK_PAGE_SIZE
+        )
 
         val pageConfig = PagedList.Config.Builder()
             .setPageSize(NETWORK_PAGE_SIZE)
@@ -30,7 +32,8 @@ class PopularMoviesRepository(
 
         val livePageList = localDataSource.getPopularMoviesDataFactory().toLiveData(
             config = pageConfig,
-            boundaryCallback = boundaryCallback)
+            boundaryCallback = boundaryCallback
+        )
 
         return Listing<Movie>(
             pagedList = livePageList,
@@ -46,5 +49,11 @@ class PopularMoviesRepository(
         )
 
     }
+
+    fun getfavoriteMoviesPagedList() =
+        localDataSource.getFavoriteMovies().toLiveData(pageSize = 20)
+
+
+    suspend fun toggleFavorites(movie: Movie) = localDataSource.toggleFavorites(movie)
 
 }

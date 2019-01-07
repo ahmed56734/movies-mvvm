@@ -1,15 +1,11 @@
-package io.ahmed56734.movies
+package io.ahmed56734.movies.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +33,7 @@ class MoviesAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALL
     }
 
 
-    inner class MovieViewHolder(itemView: View, private val binding: MovieListItemBinding) : RecyclerView.ViewHolder(itemView) {
+    private inner class MovieViewHolder(itemView: View, private val binding: MovieListItemBinding) : RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener {

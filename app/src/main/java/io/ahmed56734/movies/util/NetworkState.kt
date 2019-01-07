@@ -1,4 +1,4 @@
-package io.ahmed56734.movies.repository
+package io.ahmed56734.movies.util
 
 enum class Status {
     RUNNING,
@@ -14,6 +14,7 @@ data class NetworkState private constructor(
     companion object {
         val LOADED = NetworkState(Status.SUCCESS)
         val LOADING = NetworkState(Status.RUNNING)
-        fun error(msg: String?) = NetworkState(Status.FAILED, msg)
+        fun error(msg: String?) =
+            NetworkState(Status.FAILED, msg)
     }
 }

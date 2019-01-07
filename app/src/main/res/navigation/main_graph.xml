@@ -18,7 +18,11 @@
         android:id="@+id/movieDetailsFragment"
         android:name="io.ahmed56734.movies.ui.details.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" />
+        tools:layout="@layout/fragment_movie_details" >
+        <argument
+            android:name="movieId"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="io.ahmed56734.movies.ui.favorites.FavoritesFragment"
