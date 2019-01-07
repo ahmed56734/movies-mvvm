@@ -9,8 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import io.ahmed56734.movies.R.id.moviesRecyclerView
 import io.ahmed56734.movies.databinding.FragmentPopularMoviesBinding
 import io.ahmed56734.movies.ui.MoviesAdapter
+
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -34,6 +37,12 @@ class PopularMoviesFragment : Fragment() {
 
             binding.networkState = it
         })
+
+       viewModel.snackBarEvents.observe(this, Observer {
+           it.getContentIfNotHandled()?.run {
+               Snackbar.make(coordinatorLayout, this, Snackbar.LENGTH_LONG).show()
+           }
+       })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

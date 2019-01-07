@@ -11,8 +11,8 @@
             type="io.ahmed56734.movies.util.NetworkState" />
     </data>
 
-    <FrameLayout
-
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.popular.PopularMoviesFragment">
@@ -31,5 +31,5 @@
                 tools:listitem="@layout/movie_list_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

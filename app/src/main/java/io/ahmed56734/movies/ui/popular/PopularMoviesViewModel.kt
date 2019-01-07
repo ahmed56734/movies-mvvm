@@ -1,8 +1,11 @@
 package io.ahmed56734.movies.ui.popular
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
+import com.jakewharton.rxrelay2.PublishRelay
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.data.repository.MoviesRepository
+import io.ahmed56734.movies.util.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,7 +20,7 @@ class PopularMoviesViewModel(
 
     private val compositeJob = Job()
     override val coroutineContext: CoroutineContext
-        get() = compositeJob + Dispatchers.IO
+        get() = compositeJob + Dispatchers.Main
 
     private val repoResult = moviesRepository.popularMovies()
 
@@ -25,6 +28,7 @@ class PopularMoviesViewModel(
     val refreshState = repoResult.refreshState
     val loadMoreState = repoResult.networkState
 
+    val snackBarEvents : MutableLiveData<Event<String>> = MutableLiveData()
 
     fun retry() {
         repoResult.retry.invoke()
@@ -35,7 +39,15 @@ class PopularMoviesViewModel(
     }
 
     fun toggleFavorites(movie: Movie) = runBlocking {
+        val oldValue = movie.isFavorite
         moviesRepository.toggleFavorites(movie)
+        val snackBarMessage =
+            if (oldValue)
+                "${movie.title} removed from favorites"
+            else
+                "${movie.title} added to favorites"
+
+        snackBarEvents.value = Event(snackBarMessage)
     }
 
     override fun onCleared() {
