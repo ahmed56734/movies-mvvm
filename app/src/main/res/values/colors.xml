@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     
-    <color name="bookmark_unselected">#80000000</color>
+    <color name="bookmark_unselected">#ed8f8f8f</color>
     <color name="bookmark_selected">#eed302</color>
 </resources>

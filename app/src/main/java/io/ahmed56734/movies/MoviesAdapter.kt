@@ -3,6 +3,11 @@ package io.ahmed56734.movies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.paging.PagedListAdapter
@@ -11,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.databinding.MovieListItemBinding
 
+@BindingMethods(value = [BindingMethod(type = AppCompatImageButton::class, attribute = "app:srcCompat", method = "setImageDrawable")])
 class MoviesAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     var onMovieClicked: ((movie: Movie) -> Unit)? = null
+    var onBookmarkClicked: ((movie: Movie) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -36,7 +43,10 @@ class MoviesAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALL
             itemView.setOnClickListener {
                 onMovieClicked?.invoke(getItem(adapterPosition)!!)
             }
-           
+
+            binding.bookmarkIcon.setOnClickListener{
+                onBookmarkClicked?.invoke(getItem(adapterPosition)!!)
+            }
         }
 
         fun bind(movie: Movie) {
