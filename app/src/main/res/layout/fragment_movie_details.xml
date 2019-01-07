@@ -1,13 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.details.MovieDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="movieDetails"
+            type="io.ahmed56734.movies.data.models.MovieDetails" />
+
+        <variable
+            name="networkState"
+            type="io.ahmed56734.movies.util.NetworkState" />
+    </data>
+
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".ui.details.MovieDetailsFragment">
 
-</FrameLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/mainSwipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isRefreshing="@{networkState}">
+
+            <ScrollView
+                android:id="@+id/mainContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/backdropImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:backdrop="@{movieDetails.backdropPath}"
+                        tools:src="@drawable/backdrop_placeholder" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <TextView
+                            android:id="@+id/titleTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{movieDetails.title}"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                            tools:text="Aquaman" />
+
+                        <androidx.legacy.widget.Space
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/releaseDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{movieDetails.releaseDate}"
+                                tools:text="2018" />
+
+                            <androidx.legacy.widget.Space
+                                android:layout_width="8dp"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:movieRuntime="@{movieDetails.runtime}"
+                                tools:text="2h 23min" />
+
+                        </LinearLayout>
+
+                        <androidx.legacy.widget.Space
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="120dp"
+                                android:layout_height="156dp"
+                                android:scaleType="fitStart"
+                                app:posterImage="@{movieDetails.posterPath}"
+                                tools:src="@mipmap/ic_launcher" />
+
+                            <TextView
+                                android:id="@+id/overviewTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:text="@{movieDetails.overview}"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                                tools:text="Arthur Curry learns that he is the heir to the underwater kingdom of Atlantis, and must step forward to lead his people and be a hero to the world." />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Top-Billed Cast"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/castRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/mainProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            app:isLoading="@{networkState}"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/errorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:visibility="gone"
+            tools:text="@string/default_error_message" />
+
+    </FrameLayout>
+
+</layout>

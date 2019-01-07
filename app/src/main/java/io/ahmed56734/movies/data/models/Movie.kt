@@ -56,11 +56,6 @@ data class Movie(
     var genreIds: List<Int>? = null
 
 
-    val fullPosterPath
-        get() = "https://image.tmdb.org/t/p/w200$posterPath"
-
-    val fullbackDropPathBuilder
-        get() = "https://image.tmdb.org/t/p/w300$backdropPath"
 }
 
 class MoviesResponse(

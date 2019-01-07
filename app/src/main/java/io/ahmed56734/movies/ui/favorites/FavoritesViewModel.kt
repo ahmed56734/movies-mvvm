@@ -1,7 +1,6 @@
 package io.ahmed56734.movies.ui.favorites
 
-import androidx.lifecycle.ViewModel;
-import com.jakewharton.rxrelay2.PublishRelay
+import androidx.lifecycle.ViewModel
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.data.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineScope

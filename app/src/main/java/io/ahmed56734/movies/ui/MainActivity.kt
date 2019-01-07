@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+
         with(findNavController(R.id.navHostFragment)) {
             NavigationUI.setupActionBarWithNavController(this@MainActivity, this, drawerLayout)
             NavigationUI.setupWithNavController(navigationView, this)

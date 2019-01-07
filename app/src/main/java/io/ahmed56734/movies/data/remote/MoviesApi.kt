@@ -1,5 +1,6 @@
 package io.ahmed56734.movies.data.remote
 
+import io.ahmed56734.movies.data.models.CreditsResponse
 import io.ahmed56734.movies.data.models.MovieDetails
 import io.ahmed56734.movies.data.models.MoviesResponse
 import kotlinx.coroutines.Deferred
@@ -19,6 +20,9 @@ interface MoviesApi {
 
     @GET("movie/{movie_id}")
     fun getMovie(@Path("movie_id") id: Long): Deferred<Response<MovieDetails>>
+
+    @GET("movie/{movie_id}/credits")
+    fun getCredits(@Path("movie_id") id: Long): Deferred<Response<CreditsResponse>>
 }
 
 

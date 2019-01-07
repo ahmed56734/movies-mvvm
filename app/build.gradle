@@ -83,9 +83,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha02'
     implementation 'io.supercharge:shimmerlayout:2.1.0'
 
+    //util
+
+
+
+//    implementation 'com.github.kittinunf.result:result:2.0.0' //for jvm
+//    implementation 'com.github.kittinunf.result:result-coroutines:<latest-version>'
+
     // reactive
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+//    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+//    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+//    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
 }
