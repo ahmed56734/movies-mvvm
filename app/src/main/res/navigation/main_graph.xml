@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/popularMoviesFragment"
         android:name="io.ahmed56734.movies.ui.popular.PopularMoviesFragment"
-        android:label="PopularMoviesFragment"
+        android:label="Popular Movies"
         tools:layout="@layout/fragment_popular_movies"
       >
         <action
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="io.ahmed56734.movies.ui.details.MovieDetailsFragment"
-        android:label="fragment_movie_details"
+        android:label="Movie Details"
         tools:layout="@layout/fragment_movie_details" >
         <argument
             android:name="movieId"
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="io.ahmed56734.movies.ui.favorites.FavoritesFragment"
-        android:label="fragment_favorites"
+        android:label="Favorite Movies"
         tools:layout="@layout/fragment_favorites" >
         <action
             android:id="@+id/action_favoritesFragment_to_movieDetailsFragment"

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.ahmed56734.movies.R
-import io.ahmed56734.movies.ui.MoviesAdapter
+import io.ahmed56734.movies.ui.adapters.MoviesAdapter
 import kotlinx.android.synthetic.main.fragment_favorites.*
 import org.koin.android.viewmodel.ext.android.viewModel
 

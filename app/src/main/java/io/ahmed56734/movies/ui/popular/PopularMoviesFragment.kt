@@ -10,9 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import io.ahmed56734.movies.R.id.moviesRecyclerView
 import io.ahmed56734.movies.databinding.FragmentPopularMoviesBinding
-import io.ahmed56734.movies.ui.MoviesAdapter
+import io.ahmed56734.movies.ui.adapters.MoviesAdapter
 
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel

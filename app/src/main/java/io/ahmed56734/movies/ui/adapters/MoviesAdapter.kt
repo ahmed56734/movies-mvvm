@@ -1,4 +1,4 @@
-package io.ahmed56734.movies.ui
+package io.ahmed56734.movies.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
