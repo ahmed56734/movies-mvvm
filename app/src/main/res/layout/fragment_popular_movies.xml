@@ -5,7 +5,6 @@
 
     <data>
 
-
         <variable
             name="networkState"
             type="io.ahmed56734.movies.util.NetworkState" />
@@ -17,19 +16,36 @@
         android:layout_height="match_parent"
         tools:context=".ui.popular.PopularMoviesFragment">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:isRefreshing="@{networkState}">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/moviesRecyclerView"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/mainSwipeRefresh"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                tools:listitem="@layout/movie_list_item" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                android:layout_height="wrap_content"
+                app:isRefreshing="@{networkState}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/moviesRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    tools:listitem="@layout/movie_list_item" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+            <TextView
+                android:id="@+id/errorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:text="@string/default_error_message" />
+
+        </FrameLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -45,7 +45,7 @@ class PopularMoviesBoundaryCallback(
             try {
                 val response = remoteDataSource.getPopularMovies()
                 if (response.isSuccessful) {
-                    page++
+                    page = response.body()!!.page + 1
                     initialLoad.postValue(NetworkState.LOADED)
                     localDataSource.saveMovies(response.body()!!.movies)
                 } else {

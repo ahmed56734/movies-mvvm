@@ -2,10 +2,7 @@ package io.ahmed56734.movies.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import io.ahmed56734.movies.data.models.Movie
 
 @Dao
@@ -26,6 +23,6 @@ interface MovieDao {
     @Query("update movies set isFavorite = 0 where id = :movieId")
     fun removeFromFavorites(movieId: Long): Int
 
-    @Insert
+    @Insert()
     fun insertAll(movies: List<Movie>)
 }

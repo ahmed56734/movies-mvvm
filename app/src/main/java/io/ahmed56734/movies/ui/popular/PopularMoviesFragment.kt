@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.ahmed56734.movies.databinding.FragmentPopularMoviesBinding
 import io.ahmed56734.movies.ui.adapters.MoviesAdapter
-
+import io.ahmed56734.movies.ui.base.BaseFragment
+import io.ahmed56734.movies.util.Status
 import kotlinx.android.synthetic.main.fragment_popular_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PopularMoviesFragment : Fragment() {
+class PopularMoviesFragment : BaseFragment() {
 
 
     private val viewModel: PopularMoviesViewModel by viewModel()
@@ -31,17 +31,23 @@ class PopularMoviesFragment : Fragment() {
         })
 
         viewModel.refreshState.observe(this, Observer {
-            if(it == null)
-                return@Observer
-
             binding.networkState = it
+
+            when (it?.status) {
+                Status.RUNNING -> showErrorView(false)
+                Status.SUCCESS -> showErrorView(false)
+                Status.FAILED -> {
+                    if(moviesAdapter.itemCount == 0)
+                        showErrorView(true)
+                }
+            }
         })
 
-       viewModel.snackBarEvents.observe(this, Observer {
-           it.getContentIfNotHandled()?.run {
-               Snackbar.make(coordinatorLayout, this, Snackbar.LENGTH_LONG).show()
-           }
-       })
+        viewModel.snackBarEvents.observe(this, Observer {
+            it.getContentIfNotHandled()?.run {
+                Snackbar.make(coordinatorLayout, this, Snackbar.LENGTH_LONG).show()
+            }
+        })
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,7 +62,7 @@ class PopularMoviesFragment : Fragment() {
             onMovieClicked = {
                 findNavController().navigate(
                     PopularMoviesFragmentDirections
-                    .actionPopularMoviesFragmentToMovieDetailsFragment(it.id)
+                        .actionPopularMoviesFragmentToMovieDetailsFragment(it.id)
                 )
             }
             onBookmarkClicked = {
@@ -70,6 +76,10 @@ class PopularMoviesFragment : Fragment() {
             this.layoutManager = layoutManager
             addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
         }//recyclerview setup
+
+        binding.mainSwipeRefresh.setOnRefreshListener {
+            viewModel.refresh()
+        }
 
 
     }
