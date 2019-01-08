@@ -23,6 +23,6 @@ interface MovieDao {
     @Query("update movies set isFavorite = 0 where id = :movieId")
     fun removeFromFavorites(movieId: Long): Int
 
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(movies: List<Movie>)
 }

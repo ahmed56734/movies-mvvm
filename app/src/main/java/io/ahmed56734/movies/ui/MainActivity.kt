@@ -16,12 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSupportActionBar(toolbar)
         with(findNavController(R.id.navHostFragment)) {
             val appBarConfiguration = AppBarConfiguration(this.graph, drawerLayout)
             toolbar.setupWithNavController(this, appBarConfiguration)
             NavigationUI.setupWithNavController(navigationView, this)
         }
-        setSupportActionBar(toolbar)
+
     }
 
 
