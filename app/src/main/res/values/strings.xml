@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">movies-mvvm</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="default_error_message">Something went wrong\n swipe to refresh</string>
+</resources>
