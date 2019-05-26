@@ -59,8 +59,7 @@ class MainActivity : AppCompatActivity() {
                 if (query != null && query.isNotEmpty()) {
                     searchViewModel.search(query)
                     searchView.closeSearch()
-                    if (navController.currentDestination?.id != R.id.searchResultsFragment)
-                        navController.navigate(R.id.searchResultsFragment)
+                    navController.navigate(R.id.action_global_searchResultsFragment)
                     return true
                 }
                 return false

@@ -10,14 +10,11 @@ import androidx.paging.toLiveData
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.data.models.SearchQuery
 import io.ahmed56734.movies.data.repository.SearchRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
-class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel(), CoroutineScope {
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.IO
+class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
     private val queries = MutableLiveData<String>()
 
@@ -33,7 +30,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
     val recentQueries: LiveData<List<String>> = searchRepository.getRecentQueries()
 
-    private fun addSearchQuery(query: String) = launch {
+    private fun addSearchQuery(query: String) = GlobalScope.launch(context = Dispatchers.IO) {
         searchRepository.addSearchQuery(SearchQuery(query))
     }
 

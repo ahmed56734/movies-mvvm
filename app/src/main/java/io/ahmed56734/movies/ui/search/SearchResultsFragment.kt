@@ -36,7 +36,7 @@ class SearchResultsFragment : Fragment() {
             val bundle = bundleOf("movieId" to movieId)
             with(findNavController()) {
                 popBackStack()
-                navigate(R.id.action_global_movieDetailsFragment, bundle)
+                navigate(R.id.movieDetailsFragment, bundle)
             }
         }
 

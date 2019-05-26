@@ -13,7 +13,7 @@ interface SearchQueryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(query: SearchQuery)
 
-    @Query("select * from search_queries limit 10")
+    @Query("select * from search_queries")
     fun getRecentQueries(): LiveData<List<SearchQuery>>
 
     @Query("select count() from search_queries")

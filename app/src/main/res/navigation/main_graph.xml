@@ -32,12 +32,14 @@
             android:id="@+id/action_favoritesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
-    <action
-        android:id="@+id/action_global_movieDetailsFragment"
-        app:destination="@id/movieDetailsFragment" />
+
     <fragment
         android:id="@+id/searchResultsFragment"
         android:name="io.ahmed56734.movies.ui.search.SearchResultsFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_movies_search" />
+    <action
+        android:id="@+id/action_global_searchResultsFragment"
+        app:destination="@id/searchResultsFragment"
+        app:launchSingleTop="true" />
 </navigation>
