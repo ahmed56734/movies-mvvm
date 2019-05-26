@@ -1,11 +1,14 @@
 package io.ahmed56734.movies.data.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "movies")
+@Parcelize
 data class Movie(
     @PrimaryKey
     @SerializedName("id")
@@ -49,7 +52,7 @@ data class Movie(
     val releaseDate: String, // 2018-12-07
 
     var isFavorite: Boolean = false
-) {
+) : Parcelable {
 
     @Ignore
     @SerializedName("genre_ids")

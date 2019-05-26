@@ -7,9 +7,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import io.ahmed56734.movies.R
-import java.text.SimpleDateFormat
 import java.util.concurrent.TimeUnit
 
 
@@ -37,14 +34,14 @@ fun showSwipeRefreshLayoutLoading(swipeRefreshLayout: SwipeRefreshLayout, networ
 }
 
 @BindingAdapter("movieRuntime")
-fun setFormattedDate(textView: TextView, minutes: Int){
+fun setFormattedDate(textView: TextView, minutes: Int) {
     val hours = TimeUnit.MINUTES.toHours(minutes.toLong())
     textView.text = "${hours}h ${minutes - TimeUnit.HOURS.toMinutes(hours)}min"
 }
 
 @BindingAdapter("isLoading")
-fun showProgressBar(progressBar: ProgressBar, networkState: NetworkState?){
-    when (networkState?.status){
+fun showProgressBar(progressBar: ProgressBar, networkState: NetworkState?) {
+    when (networkState?.status) {
         Status.RUNNING -> progressBar.visibility = View.VISIBLE
         else -> progressBar.visibility = View.INVISIBLE
     }

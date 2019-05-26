@@ -5,7 +5,6 @@ import android.app.Activity
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.ahmed56734.movies.R
 
 

@@ -5,22 +5,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagedList
 import io.ahmed56734.movies.data.local.LocalDataSource
 import io.ahmed56734.movies.data.models.Movie
-import io.ahmed56734.movies.util.NetworkState
 import io.ahmed56734.movies.data.remote.RemoteDataSource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import io.ahmed56734.movies.util.NetworkState
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
+import kotlin.math.round
 
 class PopularMoviesBoundaryCallback(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val networkPageSize: Int
-) : PagedList.BoundaryCallback<Movie>() {
+) : PagedList.BoundaryCallback<Movie>(), CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.IO
 
     private val TAG = PopularMoviesBoundaryCallback::class.java.simpleName
+    private var page: Int = 1
 
-    private var page = 1
+    init {
+        runBlocking {
+            page = round(localDataSource.getMoviesCount().toDouble() / networkPageSize).toInt() + 1
+        }
+    }
+
 
     val initialLoad: MutableLiveData<NetworkState> = MutableLiveData()
     val loadMoreState: MutableLiveData<NetworkState> = MutableLiveData()
@@ -37,10 +44,10 @@ class PopularMoviesBoundaryCallback(
     }
 
     override fun onZeroItemsLoaded() {
-        if(initialJob?.isActive == true)
+        if (initialJob?.isActive == true)
             return
 
-        initialJob = GlobalScope.launch(context = Dispatchers.IO) {
+        initialJob = launch(context = Dispatchers.IO) {
             initialLoad.postValue(NetworkState.LOADING)
             try {
                 val response = remoteDataSource.getPopularMovies()
@@ -68,10 +75,11 @@ class PopularMoviesBoundaryCallback(
 
 
     override fun onItemAtEndLoaded(itemAtEnd: Movie) {
-        if(loadMoreJob?.isActive == true)
+        if (loadMoreJob?.isActive == true) {
             return
+        }
 
-        loadMoreJob = GlobalScope.launch(context = Dispatchers.IO) {
+        loadMoreJob = launch(context = Dispatchers.IO) {
             loadMoreState.postValue(NetworkState.LOADING)
             try {
                 val response = remoteDataSource.getPopularMovies(page)

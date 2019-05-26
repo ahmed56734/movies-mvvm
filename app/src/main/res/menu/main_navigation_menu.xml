@@ -3,7 +3,8 @@
 
     <item
         android:id="@+id/popularMoviesFragment"
-        android:title="Popular Movies" />
+        android:title="Popular Movies"
+        />
     <item
         android:id="@+id/favoritesFragment"
         android:title="Favorite Movies" />

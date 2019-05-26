@@ -16,7 +16,7 @@ class FavoritesViewModel(private val moviesRepository: MoviesRepository) : ViewM
     override val coroutineContext: CoroutineContext
         get() = compositeJob + Dispatchers.Main
 
-    val favoriteMoviesPagedList = moviesRepository.getfavoriteMoviesPagedList()
+    val favoriteMoviesPagedList = moviesRepository.getFavoriteMoviesPagedList()
 
 
     fun toggleFavorites(movie: Movie) = runBlocking {

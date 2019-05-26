@@ -1,10 +1,12 @@
 package io.ahmed56734.movies.data.local
 
+import androidx.lifecycle.LiveData
 import io.ahmed56734.movies.data.models.Movie
+import io.ahmed56734.movies.data.models.SearchQuery
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class LocalDataSource(private val movieDao: MovieDao) {
+class LocalDataSource(private val movieDao: MovieDao, private val searchQueryDao: SearchQueryDao) {
 
 
     suspend fun saveMovies(movies: List<Movie>) =
@@ -21,6 +23,17 @@ class LocalDataSource(private val movieDao: MovieDao) {
         }
     }
 
+    suspend fun getMoviesCount() = movieDao.getCount()
+
     fun getFavoriteMovies() = movieDao.getAllFavorites()
+
+    suspend fun addSearchQuery(searchQuery: SearchQuery) {
+        if (searchQueryDao.getCount() > 50) {
+            searchQueryDao.deleteOldest()
+        }
+        searchQueryDao.insert(searchQuery)
+    }
+
+    fun getRecentSearchQueries(): LiveData<List<SearchQuery>> = searchQueryDao.getRecentQueries()
 
 }

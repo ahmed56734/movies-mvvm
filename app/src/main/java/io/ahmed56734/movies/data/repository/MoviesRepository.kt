@@ -3,9 +3,9 @@ package io.ahmed56734.movies.data.repository
 import androidx.paging.PagedList
 import androidx.paging.toLiveData
 import io.ahmed56734.movies.data.local.LocalDataSource
-import io.ahmed56734.movies.util.Listing
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.data.remote.RemoteDataSource
+import io.ahmed56734.movies.util.Listing
 
 class MoviesRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -45,12 +45,13 @@ class MoviesRepository(
 
             refresh = {
                 boundaryCallback.onZeroItemsLoaded()
+                boundaryCallback.initialLoad
             }
         )
 
     }
 
-    fun getfavoriteMoviesPagedList() =
+    fun getFavoriteMoviesPagedList() =
         localDataSource.getFavoriteMovies().toLiveData(pageSize = 20)
 
 

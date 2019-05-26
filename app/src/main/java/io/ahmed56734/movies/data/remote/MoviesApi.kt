@@ -12,17 +12,20 @@ import retrofit2.http.Query
 interface MoviesApi {
 
     @GET("discover/movie")
-    fun discover(
+    fun discoverAsync(
         @Query("sort_by") sort: String,
         @Query("page") page: Int
     ): Deferred<Response<MoviesResponse>>
 
 
     @GET("movie/{movie_id}")
-    fun getMovie(@Path("movie_id") id: Long): Deferred<Response<MovieDetails>>
+    fun getMovieAsync(@Path("movie_id") id: Long): Deferred<Response<MovieDetails>>
 
     @GET("movie/{movie_id}/credits")
-    fun getCredits(@Path("movie_id") id: Long): Deferred<Response<CreditsResponse>>
+    fun getCreditsAsync(@Path("movie_id") id: Long): Deferred<Response<CreditsResponse>>
+
+    @GET("search/movie")
+    fun searchAsync(@Query("query") query: String, @Query("page") page: Int): Deferred<Response<MoviesResponse>>
 }
 
 

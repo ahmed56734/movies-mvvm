@@ -1,8 +1,10 @@
 package io.ahmed56734.movies.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import io.ahmed56734.movies.data.models.Movie
 
 @Dao
@@ -25,4 +27,7 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(movies: List<Movie>)
+
+    @Query("select count(id) from movies")
+    suspend fun getCount(): Int
 }

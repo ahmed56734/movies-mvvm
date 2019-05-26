@@ -12,11 +12,18 @@ import androidx.recyclerview.widget.RecyclerView
 import io.ahmed56734.movies.data.models.Movie
 import io.ahmed56734.movies.databinding.MovieListItemBinding
 
-@BindingMethods(value = [BindingMethod(type = AppCompatImageButton::class, attribute = "app:srcCompat", method = "setImageDrawable")])
+@BindingMethods(
+    value = [BindingMethod(
+        type = AppCompatImageButton::class,
+        attribute = "app:srcCompat",
+        method = "setImageDrawable"
+    )]
+)
 class MoviesAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     var onMovieClicked: ((movie: Movie) -> Unit)? = null
     var onBookmarkClicked: ((movie: Movie) -> Unit)? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -33,14 +40,15 @@ class MoviesAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(DIFF_CALL
     }
 
 
-    private inner class MovieViewHolder(itemView: View, private val binding: MovieListItemBinding) : RecyclerView.ViewHolder(itemView) {
+    inner class MovieViewHolder(itemView: View, private val binding: MovieListItemBinding) :
+        RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener {
                 onMovieClicked?.invoke(getItem(adapterPosition)!!)
             }
 
-            binding.bookmarkIcon.setOnClickListener{
+            binding.bookmarkIcon.setOnClickListener {
                 onBookmarkClicked?.invoke(getItem(adapterPosition)!!)
             }
         }

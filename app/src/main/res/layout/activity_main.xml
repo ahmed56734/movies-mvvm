@@ -12,15 +12,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.appbar.AppBarLayout
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize" />
-        </com.google.android.material.appbar.AppBarLayout>
+                android:layout_height="?actionBarSize"
+                app:title="popular movies"/>
+
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/searchView"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+          />
+        </FrameLayout>
+
 
         <fragment
             android:id="@+id/navHostFragment"
@@ -29,6 +39,8 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:navGraph="@navigation/main_graph" />
+
+
     </LinearLayout>
 
 

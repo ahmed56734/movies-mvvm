@@ -3,12 +3,15 @@ package io.ahmed56734.movies.ui.details
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import io.ahmed56734.movies.data.models.Cast
 import io.ahmed56734.movies.data.models.MovieDetails
 import io.ahmed56734.movies.data.repository.DetailsRepository
 import io.ahmed56734.movies.util.NetworkState
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class MovieDetailsViewModel(private val detailsRepository: DetailsRepository) : ViewModel(), CoroutineScope {

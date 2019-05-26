@@ -19,6 +19,10 @@ val databaseModule = module {
     }
 
     single {
-        LocalDataSource(movieDao = get())
+        get<MoviesDatabase>().searchQueryDao()
+    }
+
+    single {
+        LocalDataSource(movieDao = get(), searchQueryDao = get())
     }
 }

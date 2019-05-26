@@ -37,7 +37,7 @@ class PopularMoviesFragment : BaseFragment() {
                 Status.RUNNING -> showErrorView(false)
                 Status.SUCCESS -> showErrorView(false)
                 Status.FAILED -> {
-                    if(moviesAdapter.itemCount == 0)
+                    if (moviesAdapter.itemCount == 0)
                         showErrorView(true)
                 }
             }
