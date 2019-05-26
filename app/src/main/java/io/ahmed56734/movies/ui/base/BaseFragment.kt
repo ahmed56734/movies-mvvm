@@ -34,7 +34,7 @@ abstract class BaseFragment : Fragment() {
     fun showErrorView(show: Boolean, message: String? = null) {
         if (context == null)
             return
-        (context as Activity)?.findViewById<TextView>(R.id.errorView)?.run {
+        (context as Activity).findViewById<TextView>(R.id.errorView)?.run {
             this.visibility = if (show) View.VISIBLE else View.INVISIBLE
 
             if (message != null)

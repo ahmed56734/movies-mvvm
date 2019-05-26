@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph.xml"
-    app:startDestination="@id/popularMoviesFragment"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph.xml"
+    app:startDestination="@id/popularMoviesFragment">
 
     <fragment
         android:id="@+id/popularMoviesFragment"
         android:name="io.ahmed56734.movies.ui.popular.PopularMoviesFragment"
-        android:label="Popular Movies"
-        tools:layout="@layout/fragment_popular_movies"
-      >
+        android:label="@string/popular_movies"
+        tools:layout="@layout/fragment_popular_movies">
         <action
             android:id="@+id/action_popularMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
@@ -17,8 +17,8 @@
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="io.ahmed56734.movies.ui.details.MovieDetailsFragment"
-        android:label="Movie Details"
-        tools:layout="@layout/fragment_movie_details" >
+        android:label="@string/movies_details"
+        tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movieId"
             app:argType="long" />
@@ -26,16 +26,18 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="io.ahmed56734.movies.ui.favorites.FavoritesFragment"
-        android:label="Favorite Movies"
-        tools:layout="@layout/fragment_favorites" >
+        android:label="@string/favorite_movies"
+        tools:layout="@layout/fragment_favorites">
         <action
             android:id="@+id/action_favoritesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
-    <action android:id="@+id/action_global_movieDetailsFragment" app:destination="@id/movieDetailsFragment" />
+    <action
+        android:id="@+id/action_global_movieDetailsFragment"
+        app:destination="@id/movieDetailsFragment" />
     <fragment
         android:id="@+id/searchResultsFragment"
         android:name="io.ahmed56734.movies.ui.search.SearchResultsFragment"
-        android:label="fragment_movies_search"
+        android:label="@string/search"
         tools:layout="@layout/fragment_movies_search" />
 </navigation>

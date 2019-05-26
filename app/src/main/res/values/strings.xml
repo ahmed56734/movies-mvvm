@@ -6,4 +6,8 @@
 
 
     <string name="default_error_message">Something went wrong\n swipe to refresh</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="movies_details">Movie Details</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="search">Search</string>
 </resources>

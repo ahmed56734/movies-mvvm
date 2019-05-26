@@ -41,8 +41,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:visibility="invisible"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:visibility="invisible"
                 tools:text="@string/default_error_message" />
 
         </FrameLayout>

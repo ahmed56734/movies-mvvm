@@ -26,9 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        toolbar.title = "popular movies"
-
         navController = findNavController(R.id.navHostFragment)
+        toolbar.title = navController.currentDestination?.label
         val appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         toolbar.setupWithNavController(navController, appBarConfiguration)
         navigationView.setupWithNavController(navController)
